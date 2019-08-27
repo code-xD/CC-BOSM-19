@@ -1,0 +1,1 @@
+This is the repository for Sports Crypt, a event to be hosted by Coding Club in BOSM 2019.
