@@ -43,17 +43,13 @@ def login(request):
 
             try:
                 participant = Participant.objects.get(email=email)
+                if participant.team:
+                    return JsonResponse({"message": "User Login Successful!", "status": 1})
+                else:
+                    return JsonResponse({"message": "Participant does not belong to any Team!", "status": 0})
             except User.DoesNotExist:
                 participant = Participant.objects.create(email=email)
-            #     user = User.objects.create(username=username)
-            # except Exception as e:
-            #     print(str(e))
-            #     return JsonResponse({"message": "User creation Failed!", "status": 0})
-            
-            # try:
-            #     participant = Participant.objects.get(user=user)
-            # except Participant.DoesNotExist:
-            #     participant = Participant.objects.create(user=user, email=email)
+                return JsonResponse({"message": "Participant does not belong to any Team!", "status": 0})
 
         except ValueError:
             # Invalid token
@@ -80,8 +76,8 @@ def team_register(request):
 
         for participant in participants:
             try:
-                user = User.objects.get(username=username)
+                participant = Participant.objects.get(email=email)
                 return JsonResponse({"message": "User already exists", "status": 0})
             except User.DoesNotExist:
-                user = User.objects.create_user(username=username)
+                user = User.objects.create_user(email=email)
 
