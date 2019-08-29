@@ -1,14 +1,15 @@
 from google.oauth2 import id_token
 from django.http import JsonResponse
-
+import requests
 from django.views.decorators.csrf import csrf_exempt
-
+from django.db import transaction
 from .models import *
 import SportsCrypt.keyconfig as senv
 
 import json
 
 # team edit view
+
 
 @csrf_exempt
 def login(request):
@@ -44,16 +45,17 @@ def login(request):
             try:
                 participant = Participant.objects.get(email=email)
                 if participant.team:
-                    return JsonResponse({"message": "User Login Successful!", "status": 1})
+                    return JsonResponse({"message": "User Login Successful!", "status": 1, "participant id": participant.id})
                 else:
                     return JsonResponse({"message": "Participant does not belong to any Team!", "status": 0})
-            except User.DoesNotExist:
+            except Participant.DoesNotExist:
                 participant = Participant.objects.create(email=email)
                 return JsonResponse({"message": "Participant does not belong to any Team!", "status": 0})
 
         except ValueError:
             # Invalid token
             return JsonResponse({"message": "Invalid ID Token passed!", "status": 0})
+
 
 @csrf_exempt
 def team_register(request):
@@ -73,11 +75,15 @@ def team_register(request):
 
         team_name = data['team_name']
         participants = data['participant_list']
-
-        for participant in participants:
-            try:
-                participant = Participant.objects.get(email=email)
-                return JsonResponse({"message": "User already exists", "status": 0})
-            except User.DoesNotExist:
-                user = User.objects.create_user(email=email)
-
+        try:
+            with transaction.atomic():
+                team = Team.objects.create(name=team_name, state=0)
+                for participant in participants:
+                    participant = Participant.objects.get(email=participant["email"])
+                    if participant.team is not None:
+                        raise Exception
+                    participant.team = team
+                    participant.save()
+            return JsonResponse({"message": "Team registered successfully", "status": 1, "team_id": team.id})
+        except Exception:
+            return JsonResponse({"message": "Participant team already exists.", "status": 0})
