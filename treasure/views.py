@@ -110,5 +110,36 @@ def question_details(request):
             req_question=Question.objects.get(pk=participant.team.state+1)
             return JsonResponse({"question_id":req_question.unique_id,"question_text":req_question.question,"status":1}
         except Exception:
-            return JsonResponse({"message": "No such question exists.", "status": 0})   
-        
+            return JsonResponse({"message": "No such question exists.", "status": 0})
+
+
+def check_question_answer(request):
+    if request.method =='POST':
+        try:
+            authorization = str(request.META['HTTP_X_AUTHORIZATION'])
+        except KeyError:
+            return JsonResponse({"message": "Authorization Header Missing. Couldn't verify request source", "status": 0})
+
+        if authorization != senv.AUTHORIZATION:
+            return JsonResponse({"message": "Invalid Request Source", "status": 0})
+        try:
+            data = json.loads(request.body.decode("utf-8").replace("'",'"'))
+        except Exception:
+            return JsonResponse({"message": "Please check syntax of JSON data passed.", "status": 0})
+
+        question_id = data['question_unique_id']
+        team_name = data['team_name']
+        try:
+            question = Question.objects.get(question_unique_id=question_id)
+            ans_saved = data['ans']  #there is no answer in the database yet.
+            answer = Question.answer.objects.get(question=question)
+            attempts=answer.times_answered
+            attempts+=1
+            team = Team.objects.get(team_name=team_name)
+            if ans_saved == answer:
+                team.state+=1
+                return JsonResponse({"message":"Team answered the question correctly.","status":0,"team_state":team.state,"answer_times_answered":attempts})
+            else:
+                return JsonResponse({"message":"Answer is incorrect","status":0})
+        except:
+            return JsonResponse({"message":"Check if the question has been answered","status":0})
