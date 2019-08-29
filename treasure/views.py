@@ -87,3 +87,28 @@ def team_register(request):
             return JsonResponse({"message": "Team registered successfully", "status": 1, "team_id": team.id})
         except Exception:
             return JsonResponse({"message": "Participant team already exists.", "status": 0})
+
+@csrf_exempt
+def question_details(request):
+        if request.method == 'POST':
+        try:
+            authorization = str(request.META['HTTP_X_AUTHORIZATION'])
+        except KeyError:
+            return JsonResponse({"message": "Authorization Header Missing. Couldn't verify request source", "status": 0})
+
+        if authorization != senv.AUTHORIZATION:
+            return JsonResponse({"message": "Invalid Request Source", "status": 0})
+
+        try:
+            data = json.loads(request.body.decode('utf8'))
+        except Exception:
+            return JsonResponse({"message": "Please check syntax of JSON data passed.", "status": 0})
+
+        part_id = data['participant_id']
+        try:
+            participant = Participant.objects.get(unique_id=part_id)
+            req_question=Question.objects.get(pk=participant.team.state+1)
+            return JsonResponse({"question_id":req_question.unique_id,"question_text":req_question.question,"status":1}
+        except Exception:
+            return JsonResponse({"message": "No such question exists.", "status": 0})   
+        
