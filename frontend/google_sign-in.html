@@ -3,6 +3,7 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="550144110348-puc1jhgg5v7d3p8l8ar4940ab0nsjb50.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="js/sign-in_ajax.js"></script>
     <style>
       body{
         background-image: url("assets/images/Background.svg");
@@ -35,6 +36,7 @@
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
       }
+      sendtoken();
     </script>
   </body>
 </html>
