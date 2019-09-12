@@ -6,11 +6,12 @@
 #rotate-prompt{
 	display: none;
 	visibility: hidden;
-	  width:75%;
-	  margin-top:40%;
-	  margin-left: 14%;
-	  color:white;
-	  text-align: center;
+	flex-direction:column;
+	width:75%;
+	margin-top:40%;
+    margin-left: 14%;
+	color:white;
+	text-align: center;
   }
   #rotate-prompt img{
 	margin-left:-20%;
@@ -179,7 +180,7 @@ p {
 	}
 	
     #rotate-prompt{
-      display: block;
+      display: flex;
 	  visibility: visible;  
 	}
 	
