@@ -5,6 +5,15 @@ body{
   overflow: hidden;
 }
 
+ @font-face {
+    font-family: "caribbean";
+    src: url("../assets/fonts/Caribbean.ttf")
+  }
+
+p {
+  font-family: caribbean;
+}
+
 .container {
   height: 100vh;
   width: 100vw;
