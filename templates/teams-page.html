@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{%load staticfiles%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width>, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/teams-page.css">
+    <link rel="stylesheet" href="{% static "css/teams-page.css" %}">
 </head>
 <body>
         <div id="container">
@@ -15,9 +16,9 @@
 
     <div class="main">
         <div class="piratecrew">
-            <img src="/assets/images/Pirate Crew-06.svg">
+            <img src="{% static "assets/images/Pirate Crew-06.svg" %}">
         </div>
-        
+
         <div class="team">
             <h1 id="teamname">Team Name</h1>
             <div class="team-members">
@@ -27,10 +28,10 @@
             </div>
         </div>
         <div class="refresh">
-            <button class="refreshbtn" id="refbut">Refresh</button>           
+            <button class="refreshbtn" id="refbut">Refresh</button>
         </div>
     </div>
-    
-    <script src="/js/teampage.js"></script>
+
+    <script src="{%static "js/teampage.js" %}"></script>
 </body>
 </html>

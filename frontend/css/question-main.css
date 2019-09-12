@@ -1,8 +1,17 @@
 body{
   width:100vw;
   height: 100vh;
-  font-family: "Caribbean Regular";
+  font-family: caribbean;
   overflow: hidden;
+}
+
+ @font-face {
+    font-family: "caribbean";
+    src: url("../assets/fonts/Caribbean.ttf")
+  }
+
+p {
+  font-family: caribbean;
 }
 
 .container {
@@ -149,18 +158,35 @@ body{
   top: 0;
 }
 
-#dialogue-text{
-  top:10%;
-  left:13%;
-  font-family: "Caribbean Regular";
-  animation-delay: 8s
-  animation: textslide 1s;
-  animation-fill-mode: forwards;
-  z-index:70;
-  position: absolute;
-  width:80%;
-  color: white;
-  font-size:2.5vw;
+#dialogue-text {
+    top: 15%;
+    left: 15%;
+    font-family: "Caribbean Regular";
+    animation-delay: 8s animation: textslide 1s;
+    animation-fill-mode: forwards;
+    z-index: 70;
+    position: absolute;
+    width: 75%;
+    height: 54%;
+    color: white;
+    font-size: 2.5vw;
+    overflow-y: scroll;
+}
+
+#dialogue-text > .content-div > .desc-div::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+/* #dialogue-text > .content-div > .desc-div::-webkit-scrollbar-track {
+    background: #888; 
+} */
+  
+#dialogue-text > .content-div > .desc-div::-webkit-scrollbar-thumb {
+    background: #f1f1f1; 
+}
+  
+#dialogue-text > .content-div > .desc-div::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 
 .map-animation{

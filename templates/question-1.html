@@ -1,73 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load staticfiles%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SportsCrypt</title>
-    <link rel="stylesheet" href="css/question.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script>
-    function Scrolldown() {
-         window.scroll(0,10);
-    }
-
-    </script>
-
-</head>
+    <link rel="stylesheet" href="{% static "css/question.css"%}" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="{% static "js/ajax-questions.js"%}"></script>
+    <script src="{% static "js/question.js"%}"></script>
+ </head>
 
 <body>
 
-  <div id="rotate-prompt">
-  <img src="assets/images/rotate-screen.gif">
-  Please play the game in landscape mode!
-  </div>
-
-  <div class="container">
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-
-      <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3 class="modal-title">Oops! Your Answer is Incorrect!</h3>
-          </div>
-          <div class="modal-body">
-            <h4>There's still hope and time left!!</h4>
-            <p>Dont't give up. Try again. <br>The treasure is yours to take!<br><br>Click 'Next' on reaching the location</p>
-
-          </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Next</button>
-            </div>
-          </div>
-
-        </div>
+  <div id="popup1" class="overlay">
+    <div class="popup">
+      <h2>Oops! Incorrect Answer</h2>
+      <a class="close" href="#">&times;</a>
+      <div class="content">
+        <p>Dont lose hope! There is still time left!</p>
       </div>
+    </div>
+  </div>
 
+
+    <div id="rotate-prompt">
+        <img src="{% static "assets/images/rotate-screen.gif" %}">
+        Please play the game in landscape mode!
+    </div>
+    <div class="background">
+    <p id="heading"> Question 1</p>
+
+    <p id="q-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+
+    <div class="input2">
+        <input class="input2">
     </div>
 
-  <div class="container-self">
-    <div id="textbox">
-        <img id="dialogue" src="assets/images/Dialogue Box_Artboard 7.svg">
-        <h1 id="heading"> Question No. 1</h1>
-        <div id="question">
-          <p>What is the total number of hostels in BITS Pilanitttttttttt tttt tttttt tttt t tt tttt ttttt tttt ttttttt tt ttttt tttttt tttt t t t t   tttt ttttttt t t tttt t  ttttt tttt t t tttttttt tttt t ttt tt ttttt tiydhbi iuhou hiu jn n ijk mjihkdnc; j m mk n nl;m;n n; ;jougbu jij</p>
-        </div>
-        <form id="answer-form" class="form-inline" action="">
-          <input type="text" id="q1" placeholder="Your Answer" name="answer">
-          <button id ="submit-button" type="button">Submit</button>
-        </form>
+    <a id="submit-btn" onclick="sendres()"><p>Submit</p></a>
     </div>
-    <img id="bg-img" src="assets/images/First Background edit.jpg">
-    <img id="character" src="assets/images/Character_Artboard 7.png">
-
-  </div>
-  </div>
 </body>
-
 </html>

@@ -4,10 +4,10 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="550144110348-puc1jhgg5v7d3p8l8ar4940ab0nsjb50.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <!-- <script src="{% static "js/sign-in_ajax.js" %}"></script> -->
+    <script src="{% static "js/sign-in_ajax.js" %}"></script>
     <style>
       body{
-        background-image: url("assets/images/Background.svg");
+        background-image: url("{%static "assets/images/Background.svg" %}");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -66,6 +66,7 @@
           }
         };
         res.send(send);
+        window.location.href = "http://localhost:8000/treasure/StartGame.html";
       }
     </script>
   </body>

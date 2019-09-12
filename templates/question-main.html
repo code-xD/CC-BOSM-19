@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    {% load staticfiles %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SportsCrypt</title>
-    <link rel="stylesheet" href="css/question-main.css">
+    <link rel="stylesheet" href="{%static "css/question-main.css" %}">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -46,6 +47,9 @@
     bool=1;
     });
   });
+  function redirect() {
+    window.location.href = "http://localhost:8000/treasure/question-1.html";
+  }
 
 </script>
 
@@ -54,7 +58,7 @@
   <body>
 
    <div id="rotate-prompt">
-    <img src="assets/images/rotate-screen.gif">
+    <img src="{%static "assets/images/rotate-screen.gif" %}">
     <p>Please play the game in landscape mode!</p>
     </div>
 
@@ -62,15 +66,15 @@
       <!--<img id="background-image" class= "center fit" src="assets/images/First Background edit.jpg">-->
       <div class="main">
         <div id="dialogue-cont">
-          <img id="dialogue" src="assets/images/Dialogue Box_Artboard 7.svg">
-          <button id="next" type="button">Next</button>
+          <img id="dialogue" src="{%static "assets/images/Dialogue Box_Artboard 7.svg" %}">
+          <button id="next" type="button" onclick="redirect()">Next</button>
           <div id="dialogue-text">
             <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.<br><br>Lorem ipsum is placeholder text commonly used in the graphic, print..</p>
           </div>
-          <img id="character" src="assets/images/Character_Artboard 7.png">
+          <img id="character" src="{% static "assets/images/Character_Artboard 7.png"%}">
         </div>
         <button id="map-close" type="button"></button>
-        <img id="map" src="assets/images/Map 1.svg">
+        <img id="map" src="{% static "assets/images/Map 1.svg"%}">
         <!-- <button class="btn" id="my-crew" type="button"></button> -->
         <!-- <button class="btn" id="sign-out" type="button"></button> -->
         <div class="btn" id="my-crew"></div>
