@@ -16,7 +16,7 @@ body{
   left: 0;
   height: 100%;
   width: 100%;
-  background-image: url('../assets/images/First Background edit.jpg');
+  background-image: url('../assets/images/background-01.svg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -68,13 +68,13 @@ body{
 .btn{
   position: absolute;
   z-index: 150;
-  opacity: 0;
+  /*opacity: 0;*/
   width: 19%;
   height: 10%;
   cursor: pointer;
-  background-color: #ad8d3c;
-  color: #4a2a0a;
-  border: 2px solid #80553d;
+/*   background-color: #ad8d3c; */
+/*   color: #4a2a0a; */
+/*   border: 2px solid #80553d; */
 }
 
 .btn p {
@@ -103,11 +103,19 @@ body{
 #my-crew{
   top:49%;
   left: 76%;
+  background-image: url('../assets/images/mycrew.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #sign-out{
   top:72%;
   left: 76%;
+  background-image: url('../assets/images/signout.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #next{
