@@ -68,7 +68,7 @@ body{
 .btn{
   position: absolute;
   z-index: 150;
-  opacity: 0;
+  /*opacity: 0;*/
   width: 19%;
   height: 10%;
   cursor: pointer;
@@ -103,11 +103,19 @@ body{
 #my-crew{
   top:49%;
   left: 76%;
+  background-image: url('../assets/images/mycrew.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #sign-out{
   top:72%;
   left: 76%;
+  background-image: url('../assets/images/signout.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #next{
