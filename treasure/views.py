@@ -1,14 +1,23 @@
 from google.oauth2 import id_token
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import requests
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from .models import *
+from django.shortcuts import render
 import SportsCrypt.keyconfig as senv
 
 import json
 
 # team edit view
+
+
+def renderLogin(request):
+    return render(request, 'google_sign-in.html')
+
+
+def renderToken(request):
+    return HttpResponse('Logged in')
 
 
 @csrf_exempt
@@ -56,6 +65,7 @@ def login(request):
             # Invalid token
             return JsonResponse({"message": "Invalid ID Token passed!", "status": 0})
 
+
 @csrf_exempt
 def create_team(request):
     if request.method == 'POST':
@@ -84,14 +94,15 @@ def create_team(request):
             team.save()
         except Exception:
             return JsonResponse({'message': 'Team could not be Formed', 'status': 0})
-        
+
         try:
-            participant = Participant.objects.get(unique_id = part_id)
+            participant = Participant.objects.get(unique_id=part_id)
             participant.team = team
             participant.save()
             return JsonResponse({'message': 'Team Formed', 'team_name': team.name, 'team_code': team.code, 'status': 1})
         except Exception:
             return JsonResponse({'message': 'Participant could not be Updated', 'status': 0})
+
 
 @csrf_exempt
 def join_team(request):
@@ -114,20 +125,20 @@ def join_team(request):
             code = data['team_code']
         except KeyError as missing_data:
             return JsonResponse({'message': 'Field missing: {0}'.format(missing_data), 'status': 0})
-        
+
         try:
-            team = Team.objects.get(code = code)
+            team = Team.objects.get(code=code)
         except Team.DoesNotExist:
             return JsonResponse({'message': 'Invalid Team Code', 'status': 0})
-        
+
         if team.participant_count == 15:
             return JsonResponse({'message': 'Team Participant Limit Reached.', 'status': 0})
-        
+
         try:
             participant = Participant.objects.get(unique_id=part_id)
         except Participant.DoesNotExist:
             return JsonResponse({'message': 'Invalid Participant ID', 'status': 0})
-        
+
         try:
             participant.team = team
             participant.save()
@@ -163,15 +174,16 @@ def question_details(request):
             with transaction.atomic():
                 participant = Participant.objects.get(unique_id=part_id)
                 req_question = Question.objects.get(pk=participant.team.state+1)
-            return JsonResponse({"question_id":req_question.unique_id,"question_text":req_question.question,"status":1})
+            return JsonResponse({"question_id": req_question.unique_id, "question_text": req_question.question, "status": 1})
         except Exception:
             return JsonResponse({"message": "No such question exists.", "status": 0})
     else:
         return JsonResponse({"message": "A <POST> request to get the question", "status": 0})
 
+
 @csrf_exempt
 def check_question_answer(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         try:
             authorization = str(request.META['HTTP_X_AUTHORIZATION'])
         except KeyError:
@@ -180,13 +192,13 @@ def check_question_answer(request):
         if authorization != senv.AUTHORIZATION:
             return JsonResponse({"message": "Invalid Request Source", "status": 0})
         try:
-            data = json.loads(request.body.decode("utf-8").replace("'",'"'))
+            data = json.loads(request.body.decode("utf-8").replace("'", '"'))
         except Exception:
             return JsonResponse({"message": "Please check syntax of JSON data passed.", "status": 0})
         try:
             question_id = data['question_id']
             participant_id = data['participant_id']
-            ans_saved = data['ans']  #there is no answer in the database yet.
+            ans_saved = data['ans']  # there is no answer in the database yet.
         except KeyError as missing_data:
             return JsonResponse({'message': 'Field missing: {0}'.format(missing_data), 'status': 0})
 
@@ -201,11 +213,11 @@ def check_question_answer(request):
                 team.save()
                 answer.times_answered += 1
                 answer.save()
-                return JsonResponse({"message":"Team answered the question correctly.", "status": 1})
+                return JsonResponse({"message": "Team answered the question correctly.", "status": 1})
             else:
-                return JsonResponse({"message":"Answer is incorrect", "status": 0})
+                return JsonResponse({"message": "Answer is incorrect", "status": 0})
         except:
-            return JsonResponse({"message":"Check if the question has been answered", "status":0})
+            return JsonResponse({"message": "Check if the question has been answered", "status": 0})
 
 # @csrf_exempt
 # def team_register(request):

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SportsCrypt</title>
+    <link rel="stylesheet" href="css/question-main.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" language="JavaScript">
+
+    function set_body_height() { // set body height = window height
+      $('body').height($(window).height());
+    }
+    $(document).ready(function() {
+        $(window).bind('resize', set_body_height);
+        set_body_height();
+  });
+
+
+  function reset_animation() {
+    var el = document.getElementById('map');
+    el.style.animation = 'none';
+    el.offsetHeight; /* trigger reflow */
+    el.style.animation = null;
+  }
+
+  $(function(){
+    $('#map-button').on('click',function(){
+      $('#map').addClass('map-animation-2');
+      $('#map').removeClass('map-animation')
+    });
+  });
+
+
+  $(function(){
+    var bool= 0;
+    $('#map-close').on('click',function(){
+      $('#map').addClass('map-animation');
+      $('#map').removeClass('map-animation-2');
+      if(bool==0){
+      $('#character').hide(0).delay(1000).fadeIn(1500);
+      $('#dialogue').hide(0).delay(2500).show(0);
+      $('#dialogue').addClass('box-animation');
+      $('#dialogue-text').hide(0).delay(3000).fadeIn(4000);
+      $('#next').hide().delay(5000).fadeIn(1000);
+    }
+    bool=1;
+    });
+  });
+
+</script>
+
+    <style>
+    *{
+      padding:0;
+      margin:0;
+    }
+    .fit { /* set relative picture size */
+          max-width: 100%;
+          max-height: 100%;
+      }
+      .center {
+          display: block;
+          margin: auto;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="rotate-prompt">
+    <img src="assets/images/rotate-screen.gif">
+    Please play the game in landscape mode!
+    </div>
+
+    <div class="container">
+      <img id="background-image" class= "center fit" src="assets/images/First Background edit.jpg">
+      <div id="dialogue-cont">
+        <img id="dialogue" class="textbox" src="assets/images/Dialogue Box_Artboard 7.svg">
+      </div>
+      <img id="map" src="assets/images/Map 1.svg">
+      <img id="character" src="assets/images/Character_Artboard 7.png">
+      <div id="dialogue-text">
+        <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.<br><br>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
+      </div>
+      <button class="btn" id="my-crew" type="button"></button>
+      <button class="btn" id="sign-out" type="button"></button>
+
+      <button onclick="reset_animation()" class="btn-map" id="map-button" type="button"></button>
+      <button id="next" type="button">Next</button>
+
+      <button id="map-close" type="button"></button>
+    </div>
+  </body>
+</html>
