@@ -72,6 +72,9 @@ body{
   width: 19%;
   height: 10%;
   cursor: pointer;
+  background-color: #ad8d3c;
+  color: #4a2a0a;
+  border: 2px solid #80553d;
 }
 
 #map-button{
