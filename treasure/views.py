@@ -20,18 +20,23 @@ def renderToken(request):
     return HttpResponse('Logged in')
 
 
+def renderFile(request, filename):
+    return render(request, filename)
+
+
+@csrf_exempt
+def getData(request):
+    if request.method == 'POST':
+        print(request.body)
+        return JsonResponse({'status': 1})
+    if request.method == 'GET':
+        return JsonResponse({'pin': 4006})
+
+
 @csrf_exempt
 def login(request):
 
     if request.method == 'POST':
-
-        try:
-            authorization = str(request.META['HTTP_X_AUTHORIZATION'])
-        except KeyError:
-            return JsonResponse({"message": "Authorization Header Missing. Couldn't verify request source", "status": 0})
-
-        if authorization != senv.AUTHORIZATION:
-            return JsonResponse({"message": "Invalid Request Source", "status": 0})
 
         try:                # just to decode JSON properly
             data = json.loads(request.body.decode('utf8').replace("'", '"'))

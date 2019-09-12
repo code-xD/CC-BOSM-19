@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles%}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="{% static "css/StartGame.css"%}" type="text/css">
+		<link rel="stylesheet" href="{% static "css/loader.css"%}">
+		<script src="{% static "js/join_team.js" %}"></script>
+	</head>
+	<body>
+		<!--Loader-->
+		<div class="loader">
+			<div class="flip-card ">
+				<div class="flip-card-inner">
+					<div class="flip-card-front">
+						<img src="{%static "assets/images/loader_skull.svg"%}" alt="Avatar" style="width:40vw;height:50vh;">
+					</div>
+					<div class="flip-card-back">
+						<img src="{%static "assets/images/bosm_logo.svg"%}" alt="Avatar" style="width:40vw;height:50vh;">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Rotate prompt-->
+		<div id="rotate-prompt">
+			<img src="{%static "assets/images/rotate-screen.gif"%}">
+			Please play the game in landscape mode!
+		</div>
+
+		<!--Main page-->
+		<div class="background">
+			<a href="TeamName.html" class="start">
+				<p>Create a Team</p>
+			</a>
+			<p>Or</p>
+			<div class="flex">
+				<p class="inline">Join a Team</p>
+			<div class="input">
+			<input>
+			</div>
+				<a class ="submit" onclick="joinTeam()"><p>Submit</p></a>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+
+			function loadComplete() {
+				loader = document.querySelector(".loader");
+				loader.style.opacity = "0";
+				console.log("LOADED");
+				setTimeout(function() {
+					loader.style.display = "none"
+				}, 800);
+			}
+
+			window.onload = function(){
+				setTimeout(loadComplete, 4000);
+			};
+		</script>
+	</body>
+</html>

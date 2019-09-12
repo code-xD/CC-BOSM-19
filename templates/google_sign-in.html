@@ -1,8 +1,10 @@
 <html lang="en">
+{% load staticfiles%}
   <head>
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="550144110348-puc1jhgg5v7d3p8l8ar4940ab0nsjb50.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- <script src="{% static "js/sign-in_ajax.js" %}"></script> -->
     <style>
       body{
         background-image: url("assets/images/Background.svg");
@@ -33,8 +35,37 @@
         console.log("Email: " + profile.getEmail());
 
         // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
+        var token = googleUser.getAuthResponse().id_token;
+        // var obj = {
+        //   id : token
+        // }
+        // var send = JSON.stringify(obj);
+        // var res = new XMLHttpRequest();
+        // res.open("POST","/treasure/login/",true);
+        // res.setRequestHeader("Content-Type","application/json");
+        // res.onreadystatechange = function() {
+        //   if (this.readyState ==4 && this.status == 200) {
+        //   }
+        // };
+        // var resp;
+        // resp=res.send(send);
+        // console.log(resp);
+        // console.log("ID Token: " + id_token);
+
+          var obj = {
+          token : token
+        }
+        var send = JSON.stringify(obj);
+        var res = new XMLHttpRequest();
+        res.open("POST","/treasure/login/",true);
+        res.setRequestHeader("Content-Type","application/json");
+        res.onreadystatechange = function() {
+          if (this.readyState ==4 && this.status == 200) {
+            var check = JSON.parse(this.responseText);
+            console.log(check);
+          }
+        };
+        res.send(send);
       }
     </script>
   </body>
