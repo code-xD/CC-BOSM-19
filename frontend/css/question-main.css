@@ -77,6 +77,10 @@ body{
   border: 2px solid #80553d;
 }
 
+.btn p {
+  color: #4a2a0a;
+}
+
 #map-button{
   position: absolute;
   z-index: 125;
