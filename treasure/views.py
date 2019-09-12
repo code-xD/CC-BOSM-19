@@ -6,7 +6,7 @@ from django.db import transaction
 from .models import *
 from django.shortcuts import render
 import SportsCrypt.keyconfig as senv
-
+from django.contrib.auth.decorators import login_required
 import json
 
 # team edit view
@@ -19,6 +19,37 @@ def renderLogin(request):
 def renderToken(request):
     return HttpResponse('Logged in')
 
+@login_required
+def question1(request):
+    return render(request,'question-1.html')
+
+@login_required
+def question2(request):
+    return render(request,'question-2.html')
+
+@login_required
+def question3(request):
+    return render(request,'question-3.html')
+
+@login_required
+def question4(request):
+    return render(request,'question-4.html')
+
+@login_required
+def questionmain(request):
+    return render(request,'question-main.html')
+
+@login_required
+def formteam(request):
+    return render(request,'Code.html')
+
+@login_required
+def startgame(request):
+    return render(request,'StartGame.html')
+
+@login_required
+def teamname(request):
+    return render(request,'TeamName.html')
 
 @csrf_exempt
 def login(request):
