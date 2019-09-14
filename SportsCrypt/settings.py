@@ -26,7 +26,7 @@ SECRET_KEY = '&f#r#yoli9sqaa+k95=8*6t!%@t#)_spsrpsvo1j^f*0au0qq+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sportscrypt.herokuapp.com']
 
 
 # Application definition
