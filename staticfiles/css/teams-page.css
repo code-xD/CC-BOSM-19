@@ -7,7 +7,7 @@
 
 @font-face {
     font-family: "piratefont";
-    src: url("{% static "assets/fonts/CaslonishFraxx.ttf"%}");
+    src: url("/assets/fonts/CaslonishFraxx.ttf");
   }
 
 * {
@@ -21,7 +21,7 @@ body, html {
 }
 
 body {
-    background: url("{% static "/assets/images/Background.svg" %}") no-repeat center center;
+    background: url("/assets/images/Background.svg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
